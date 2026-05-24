@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Hero Subtitle Typing Effect
     const typedTextSpan = document.getElementById('typed-text');
-    const textArray = ["Web Applications.", "Scalable APIs.", "Creative Interfaces.", "Digital Solutions."];
+    const textArray = ["ML Pipelines.", "Optimized Systems.", "Distributed Models.", "Open Source Code."];
     const typingSpeed = 100;
     const erasingSpeed = 50;
     const newTextDelay = 2000; // Delay between current and next text
