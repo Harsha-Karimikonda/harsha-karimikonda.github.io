@@ -1,1 +1,557 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harsha Karimikonda - Full-Stack Software Engineer Portfolio website. Explore my projects, skills, and professional experience.">
+    <title>Harsha Karimikonda | Full-Stack Software Engineer</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="web.css">
+</head>
+<body>
+
+    <!-- Background glowing elements -->
+    <div class="bg-glow-container">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i data-lucide="terminal"></i><span>Harsha.</span>
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                    <i data-lucide="sun" id="theme-icon-sun" style="display: none;"></i>
+                    <i data-lucide="moon" id="theme-icon-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero section">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-welcome">
+                        <span>Welcome to my digital space</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="gradient-text">Harsha Karimikonda</span>
+                    </h1>
+                    <div class="hero-subtitle">
+                        I build <span class="gradient-text" id="typed-text"></span><span class="typed-cursor">|</span>
+                    </div>
+                    <p class="hero-description">
+                        A passionate Full-Stack Software Engineer dedicated to crafting robust APIs, high-performance web applications, and seamless interactive user interfaces that solve complex real-world problems.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Get In Touch</span><i data-lucide="arrow-right"></i>
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <span>View My Work</span>
+                        </a>
+                    </div>
+                    <div class="hero-socials">
+                        <span>Connect:</span>
+                        <a href="https://github.com/Harsha-Karimikonda" target="_blank" class="social-link" aria-label="GitHub">
+                            <i data-lucide="github"></i>
+                        </a>
+                        <a href="https://linkedin.com/" target="_blank" class="social-link" aria-label="LinkedIn">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                        <a href="mailto:harsha@example.com" class="social-link" aria-label="Email">
+                            <i data-lucide="mail"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-shape-wrapper">
+                        <div class="hero-blob"></div>
+                        <div class="hero-visual-content">HK</div>
+                        <div class="hero-visual-card glass-card">
+                            <div class="hero-visual-card-icon">
+                                <i data-lucide="code-2"></i>
+                            </div>
+                            <div class="hero-visual-card-text">
+                                <h4>Backend Specialist</h4>
+                                <p>APIs & Microservices</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-tag">About Me</span>
+                <h2 class="section-title">My Journey & Background</h2>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-img-frame">
+                    <div class="about-img-placeholder">
+                        <i data-lucide="user"></i>
+                        <p>Web Developer Profile</p>
+                    </div>
+                    <div class="about-badge">
+                        <h3>3+</h3>
+                        <p>Years of<br>Coding</p>
+                    </div>
+                </div>
+                
+                <div class="about-info">
+                    <h3>Engineering applications with code, creativity, and clean design patterns.</h3>
+                    <p>
+                        I specialize in creating efficient, modular, and maintainable software systems. From optimizing backend logic to refining CSS micro-animations, I bridge the gap between engineering requirements and visually excellent, user-first frontends.
+                    </p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item glass-card">
+                            <span class="stat-num">15+</span>
+                            <span class="stat-label">Tech Stack Tools</span>
+                        </div>
+                        <div class="stat-item glass-card">
+                            <span class="stat-num">20+</span>
+                            <span class="stat-label">Projects Built</span>
+                        </div>
+                        <div class="stat-item glass-card">
+                            <span class="stat-num">100%</span>
+                            <span class="stat-label">Commitment</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Let's Build Together</span><i data-lucide="rocket"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-tag">Expertise</span>
+                <h2 class="section-title">My Skills Directory</h2>
+            </div>
+            
+            <div class="skills-grid">
+                <!-- Frontend -->
+                <div class="skill-card glass-card">
+                    <div class="skill-icon-box">
+                        <i data-lucide="layout"></i>
+                    </div>
+                    <h3>Frontend Engineering</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML5 / CSS3 / ES6+</span>
+                                <span class="skill-pct">95%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">React / JavaScript</span>
+                                <span class="skill-pct">90%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">TailwindCSS & SASS</span>
+                                <span class="skill-pct">85%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="skill-card glass-card">
+                    <div class="skill-icon-box">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3>Backend & Systems</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Node.js / Express</span>
+                                <span class="skill-pct">90%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Python / FastAPI / Django</span>
+                                <span class="skill-pct">80%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">PostgreSQL / MongoDB</span>
+                                <span class="skill-pct">85%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Infrastructure -->
+                <div class="skill-card glass-card">
+                    <div class="skill-icon-box">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3>Tools & Infrastructure</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Git / GitHub Actions</span>
+                                <span class="skill-pct">90%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Docker & Containers</span>
+                                <span class="skill-pct">75%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">REST APIs & GraphQL</span>
+                                <span class="skill-pct">90%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-percentage="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Selected Projects</h2>
+            </div>
+            
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="frontend">Frontend</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card glass-card" data-category="frontend">
+                    <div class="project-img-wrapper">
+                        <div class="project-img-fallback">
+                            <i data-lucide="kanban-square"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Harsha-Karimikonda" target="_blank" class="project-action-link" aria-label="GitHub Repository">
+                                <i data-lucide="github"></i>
+                            </a>
+                            <a href="#" class="project-action-link" aria-label="Live Demo">
+                                <i data-lucide="external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">CSS Modules</span>
+                            <span class="project-tag">Lucide</span>
+                        </div>
+                        <h3 class="project-title">Apex Task Dashboard</h3>
+                        <p class="project-description">
+                            A productivity dashboard featuring interactive Kanban boards, calendar views, sub-task breakdowns, and local database sync.
+                        </p>
+                        <div class="project-footer">
+                            <a href="#" class="project-link-text">
+                                View Case Study <i data-lucide="arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card" data-category="backend">
+                    <div class="project-img-wrapper">
+                        <div class="project-img-fallback">
+                            <i data-lucide="shopping-cart"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Harsha-Karimikonda" target="_blank" class="project-action-link" aria-label="GitHub Repository">
+                                <i data-lucide="github"></i>
+                            </a>
+                            <a href="#" class="project-action-link" aria-label="Live Demo">
+                                <i data-lucide="external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">GraphQL</span>
+                            <span class="project-tag">PostgreSQL</span>
+                        </div>
+                        <h3 class="project-title">OmniChannel API Gateway</h3>
+                        <p class="project-description">
+                            High-performance server API architecture handling catalogs, user orders, inventory, and payment integration.
+                        </p>
+                        <div class="project-footer">
+                            <a href="#" class="project-link-text">
+                                View Case Study <i data-lucide="arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card" data-category="backend">
+                    <div class="project-img-wrapper">
+                        <div class="project-img-fallback">
+                            <i data-lucide="brain-circuit"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Harsha-Karimikonda" target="_blank" class="project-action-link" aria-label="GitHub Repository">
+                                <i data-lucide="github"></i>
+                            </a>
+                            <a href="#" class="project-action-link" aria-label="Live Demo">
+                                <i data-lucide="external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">FastAPI</span>
+                            <span class="project-tag">Redis</span>
+                        </div>
+                        <h3 class="project-title">Cognitive Analytics Hub</h3>
+                        <p class="project-description">
+                            Machine learning web service evaluating user engagement analytics and offering predictive scoring via REST interfaces.
+                        </p>
+                        <div class="project-footer">
+                            <a href="#" class="project-link-text">
+                                View Case Study <i data-lucide="arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-tag">Career</span>
+                <h2 class="section-title">Experience Timeline</h2>
+            </div>
+            
+            <div class="timeline-wrapper">
+                <!-- Exp 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <div class="timeline-title">
+                                <h3>Senior Software Developer</h3>
+                                <span class="timeline-company">InnoTech Solutions</span>
+                            </div>
+                            <span class="timeline-date">2024 - Present</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>
+                                Led a core team in building a high-volume microservice dashboard. Refined backend API query efficiency by 40%. Implemented responsive CSS interfaces using custom flex and grid modules, ensuring visual elegance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exp 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <div class="timeline-title">
+                                <h3>Full-Stack Developer</h3>
+                                <span class="timeline-company">Quantum Web Labs</span>
+                            </div>
+                            <span class="timeline-date">2022 - 2024</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>
+                                Maintained and scaled REST APIs. Deployed stateful React structures connected to SQL backends. Set up secure client routing and animations, achieving 100% device-responsive compliance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exp 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <div class="timeline-title">
+                                <h3>Computer Science Graduate</h3>
+                                <span class="timeline-company">State Engineering College</span>
+                            </div>
+                            <span class="timeline-date">2018 - 2022</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>
+                                Completed engineering coursework focusing on Algorithms, System Architecture, Database Management, and Web Technologies. Graduated with Honors and completed two internship programs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <span class="section-tag">Let's Connect</span>
+                <h2 class="section-title">Drop Me A Line</h2>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div>
+                        <h3>Have a project in mind?</h3>
+                        <p class="contact-info-desc">
+                            Feel free to reach out. I'm always open to discussing new engineering projects, creative designs, or collaborating on open-source solutions.
+                        </p>
+                    </div>
+                    
+                    <div class="contact-card glass-card">
+                        <div class="contact-card-icon">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div class="contact-card-text">
+                            <p>Email Me</p>
+                            <a href="mailto:harsha@example.com">harsha@example.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-card glass-card">
+                        <div class="contact-card-icon">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div class="contact-card-text">
+                            <p>Location</p>
+                            <a href="#" style="cursor: default; pointer-events: none;">India</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form glass-card" id="portfolio-contact-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="form-name" class="form-label">Full Name</label>
+                            <input type="text" id="form-name" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-email" class="form-label">Email Address</label>
+                            <input type="email" id="form-email" class="form-input" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="form-subject" class="form-label">Subject</label>
+                            <input type="text" id="form-subject" class="form-input" placeholder="What are we talking about?" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="form-message" class="form-label">Message</label>
+                            <textarea id="form-message" class="form-input" placeholder="Type your message here..." required></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary submit-btn">
+                        <span>Send Message</span><i data-lucide="send"></i>
+                    </button>
+                    
+                    <div class="form-status" id="form-status-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    <p>&copy; 2026 Harsha Karimikonda. All rights reserved.</p>
+                </div>
+                <div class="logo">
+                    <i data-lucide="terminal"></i><span>Harsha.</span>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://github.com/Harsha-Karimikonda" target="_blank" class="social-link" aria-label="GitHub">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://linkedin.com/" target="_blank" class="social-link" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons and Portfolio JS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="main.js"></script>
+</body>
+</html>
