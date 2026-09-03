@@ -493,7 +493,24 @@ def generate_blog_index(posts):
         </article>
         """)
 
-    cards_joined = "\n".join(cards_html)
+    if not posts:
+        cards_joined = """
+        <div class="spotlight-card" style="padding: 3.5rem 2rem; text-align: center; border-radius: 18px; background: var(--bg-card); border: 1px solid var(--border-subtle);">
+            <div style="width: 54px; height: 54px; border-radius: 14px; background: rgba(56, 189, 248, 0.1); color: var(--cyan); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+                <i data-lucide="sparkles" style="width: 26px; height: 26px;"></i>
+            </div>
+            <h3 style="font-size: 1.4rem; margin-bottom: 0.75rem;">Articles Coming Soon</h3>
+            <p style="color: var(--text-secondary); max-width: 520px; margin: 0 auto 1.5rem auto; line-height: 1.65; font-size: 0.95rem;">
+                In-depth technical writeups on LLM serving architectures, continuous dynamic batching, and distributed ML systems are currently in the pipeline.
+            </p>
+            <a href="../#projects" class="btn btn-secondary">
+                <span>Explore Featured Projects</span>
+                <i data-lucide="arrow-right"></i>
+            </a>
+        </div>
+        """
+    else:
+        cards_joined = "\n".join(cards_html)
 
     return f"""<!DOCTYPE html>
 <html lang="en" data-theme="dark">
