@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3200);
     }
 
-    // 7. Contact Form Submission Handler
+    // 7. Contact Form Submission Handler (Live via FormSubmit.co)
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -163,13 +163,38 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span>Sending Message...</span>';
 
-            setTimeout(() => {
-                showToast("Message sent successfully! I will get back to you shortly.");
+            const formData = new FormData(contactForm);
+            const payload = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                _subject: `[Portfolio Inquiry] ${formData.get('subject')}`,
+                message: formData.get('message'),
+                _honey: formData.get('_honey') || '',
+                _template: 'table',
+                _captcha: 'false'
+            };
+
+            fetch('https://formsubmit.co/ajax/harshakarimikonda22@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                showToast("Message sent successfully! It has been delivered to my inbox.");
                 contactForm.reset();
+            })
+            .catch(err => {
+                showToast("Direct send error. Please email harshakarimikonda22@gmail.com directly!");
+            })
+            .finally(() => {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalContent;
                 if (typeof lucide !== 'undefined') lucide.createIcons();
-            }, 1200);
+            });
         });
     }
 
