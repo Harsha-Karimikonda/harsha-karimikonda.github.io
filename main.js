@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
         });
+        card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--mouse-x', '-1000px');
+            card.style.setProperty('--mouse-y', '-1000px');
+        });
     });
 
     // 3. Theme Toggle (Dark / Light)
@@ -190,4 +194,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 9. Mobile Menu Navigation Toggle
+    const mobileToggleBtn = document.getElementById('mobile-toggle');
+    const navLinksContainer = document.getElementById('nav-links');
+    if (mobileToggleBtn && navLinksContainer) {
+        mobileToggleBtn.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('mobile-open');
+            const isOpen = navLinksContainer.classList.contains('mobile-open');
+            mobileToggleBtn.innerHTML = isOpen
+                ? '<i data-lucide="x"></i>'
+                : '<i data-lucide="menu"></i>';
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+
+        // Close menu when clicking any nav link
+        navLinksContainer.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksContainer.classList.remove('mobile-open');
+                mobileToggleBtn.innerHTML = '<i data-lucide="menu"></i>';
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            });
+        });
+    }
 });
