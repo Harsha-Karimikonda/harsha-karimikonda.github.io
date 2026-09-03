@@ -1,4 +1,7 @@
-// main.js - Core Javascript for Interactive Portfolio
+/**
+ * Harsha Karimikonda Portfolio - Main Controller
+ * Interactions: Card Spotlight Glow, Dynamic Typing, Project Filters, Copy-to-Clipboard, Theme Switching
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Lucide Icons
@@ -6,182 +9,113 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
-    // 2. Theme Toggle (Dark / Light)
+    // 2. Mouse Spotlight Tracking on Cards
+    const spotlightCards = document.querySelectorAll('.spotlight-card, .metric-card, .featured-flagship-pill');
+    spotlightCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // 3. Theme Toggle (Dark / Light)
     const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIconSun = document.getElementById('theme-icon-sun');
-    const themeIconMoon = document.getElementById('theme-icon-moon');
     const htmlElement = document.documentElement;
-
-    // Load initial theme from localStorage or default to dark
     const savedTheme = localStorage.getItem('theme') || 'dark';
+    
     htmlElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcons(savedTheme);
+    updateThemeIcon(savedTheme);
 
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcons(newTheme);
-    });
-
-    function updateThemeIcons(theme) {
-        if (theme === 'dark') {
-            themeIconSun.style.display = 'none';
-            themeIconMoon.style.display = 'block';
-        } else {
-            themeIconSun.style.display = 'block';
-            themeIconMoon.style.display = 'none';
-        }
-    }
-
-    // 3. Mobile Navigation Menu Toggle
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    mobileToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        const isMenuOpen = navMenu.classList.contains('active');
-        mobileToggle.innerHTML = isMenuOpen 
-            ? '<i data-lucide="x"></i>' 
-            : '<i data-lucide="menu"></i>';
-        lucide.createIcons(); // Re-render icon
-    });
-
-    // Close mobile menu on nav link click
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                mobileToggle.innerHTML = '<i data-lucide="menu"></i>';
-                lucide.createIcons();
-            }
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
         });
-    });
-
-    // 4. Hero Subtitle Typing Effect
-    const typedTextSpan = document.getElementById('typed-text');
-    const textArray = [
-        "Scalable Software & Backends.",
-        "High-Throughput ML Systems.",
-        "Distributed Inference Engines.",
-        "Computer Vision & Deep Learning.",
-        "Open-Source AI & RAG Tools."
-    ];
-    const typingSpeed = 100;
-    const erasingSpeed = 50;
-    const newTextDelay = 2000; // Delay between current and next text
-    let textArrayIndex = 0;
-    let charIndex = 0;
-
-    function type() {
-        if (charIndex < textArray[textArrayIndex].length) {
-            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-            charIndex++;
-            setTimeout(type, typingSpeed);
-        } else {
-            setTimeout(erase, newTextDelay);
-        }
     }
 
-    function erase() {
-        if (charIndex > 0) {
-            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-            charIndex--;
-            setTimeout(erase, erasingSpeed);
-        } else {
-            textArrayIndex++;
-            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-            setTimeout(type, typingSpeed + 500);
-        }
+    function updateThemeIcon(theme) {
+        if (!themeToggleBtn) return;
+        themeToggleBtn.innerHTML = theme === 'dark'
+            ? '<i data-lucide="sun"></i>'
+            : '<i data-lucide="moon"></i>';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
-    // Start the typing effect
-    if (textArray.length) setTimeout(type, 1000);
+    // 4. Typing Animation
+    const typedTextEl = document.getElementById('typed-text');
+    if (typedTextEl) {
+        const phrases = [
+            "High-Throughput ML Systems.",
+            "Scalable Distributed Backends.",
+            "Low-Latency LLM Serving Planes.",
+            "Deep Learning & Computer Vision.",
+            "Open-Source AI & RAG Tools."
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 75;
+        const deleteSpeed = 40;
+        const pauseDelay = 1800;
 
-    // 5. Active Link Highlighting & Intersection Observer
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-link');
-
-    const sectionObserverOptions = {
-        root: null,
-        threshold: 0.3, // Trigger when 30% of the section is visible
-        rootMargin: "-20% 0px -40% 0px"
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const activeId = entry.target.getAttribute('id');
-                navItems.forEach(item => {
-                    if (item.getAttribute('href') === `#${activeId}`) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
+        function typeLoop() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typedTextEl.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextEl.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
             }
-        });
-    }, sectionObserverOptions);
 
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
-
-    // 6. Skill Bars Animation on Scroll
-    const skillsSection = document.getElementById('skills');
-    const skillBars = document.querySelectorAll('.skill-bar-fill');
-
-    const skillObserverOptions = {
-        root: null,
-        threshold: 0.15
-    };
-
-    const skillObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                skillBars.forEach(bar => {
-                    const percentage = bar.getAttribute('data-percentage');
-                    bar.style.width = percentage;
-                });
-                observer.unobserve(entry.target); // Trigger only once
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeLoop, pauseDelay);
+                return;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typeLoop, 400);
+                return;
             }
-        });
-    }, skillObserverOptions);
 
-    if (skillsSection) {
-        skillObserver.observe(skillsSection);
+            const currentSpeed = isDeleting ? deleteSpeed : typeSpeed;
+            setTimeout(typeLoop, currentSpeed);
+        }
+
+        setTimeout(typeLoop, 800);
     }
 
-    // 7. Projects Filtering
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    // 5. Project Category Filtering
+    const filterPills = document.querySelectorAll('.filter-pill');
     const projectCards = document.querySelectorAll('.project-card');
 
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterButtons.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
-            btn.classList.add('active');
+    filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            filterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
 
-            const filterValue = btn.getAttribute('data-filter');
+            const filter = pill.getAttribute('data-filter');
 
             projectCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                
-                // Animate filter change
                 card.style.opacity = '0';
-                card.style.transform = 'scale(0.9) translateY(10px)';
-                
+                card.style.transform = 'translateY(12px) scale(0.98)';
+
                 setTimeout(() => {
-                    if (filterValue === 'all' || category === filterValue) {
+                    if (filter === 'all' || category === filter) {
                         card.style.display = 'flex';
-                        // Trigger reflow to restart animation
-                        void card.offsetWidth;
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1) translateY(0)';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0) scale(1)';
+                        }, 50);
                     } else {
                         card.style.display = 'none';
                     }
@@ -190,55 +124,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 8. Contact Form Mock Validation & Submission
-    const contactForm = document.getElementById('portfolio-contact-form');
-    const formStatus = document.getElementById('form-status-message');
+    // 6. Quick Copy Email with Toast
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const toastNotice = document.getElementById('toast-notice');
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('form-name').value.trim();
-            const email = document.getElementById('form-email').value.trim();
-            const subject = document.getElementById('form-subject').value.trim();
-            const message = document.getElementById('form-message').value.trim();
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-
-            if (!name || !email || !subject || !message) {
-                showStatus('Please fill in all fields.', 'error');
-                return;
-            }
-
-            // Disable submit button & show loading state
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.7';
-            const originalBtnContent = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span>Sending...</span><i class="lucide-loader animate-spin"></i>';
-
-            // Simulate server network latency
-            setTimeout(() => {
-                // Mock success
-                showStatus(`Thank you, ${name}! Your message was successfully sent. I will get back to you shortly.`, 'success');
-                contactForm.reset();
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-                submitBtn.innerHTML = originalBtnContent;
-            }, 1800);
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', () => {
+            const email = "harshakarimikonda22@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                showToast("Copied harshakarimikonda22@gmail.com to clipboard!");
+            }).catch(() => {
+                showToast("Failed to copy. Email: harshakarimikonda22@gmail.com");
+            });
         });
     }
 
-    function showStatus(text, type) {
-        formStatus.textContent = text;
-        formStatus.className = 'form-status'; // Reset classes
-        formStatus.classList.add(type);
-
-        // Auto fade out status after 6 seconds
+    function showToast(message) {
+        if (!toastNotice) return;
+        toastNotice.querySelector('.toast-msg').textContent = message;
+        toastNotice.classList.add('show');
         setTimeout(() => {
-            formStatus.style.opacity = '0';
-            setTimeout(() => {
-                formStatus.style.display = 'none';
-                formStatus.style.opacity = '1';
-            }, 400);
-        }, 6000);
+            toastNotice.classList.remove('show');
+        }, 3200);
     }
+
+    // 7. Contact Form Submission Handler
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Sending Message...</span>';
+
+            setTimeout(() => {
+                showToast("Message sent successfully! I will get back to you shortly.");
+                contactForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalContent;
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }, 1200);
+        });
+    }
+
+    // 8. Navbar Scroll Spy
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let currentSectionId = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
+            }
+        });
+    });
 });
