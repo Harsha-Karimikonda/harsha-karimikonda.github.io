@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3200);
     }
 
-    // 7. Contact Form Submission Handler (Live via FormSubmit.co)
+    // 7. Contact Form Submission Handler (Direct & Fail-Safe Delivery)
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -161,40 +161,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalContent = submitBtn.innerHTML;
             
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Sending Message...</span>';
+            submitBtn.innerHTML = '<span>Opening Mail...</span>';
 
             const formData = new FormData(contactForm);
-            const payload = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                _subject: `[Portfolio Inquiry] ${formData.get('subject')}`,
-                message: formData.get('message'),
-                _honey: formData.get('_honey') || '',
-                _template: 'table',
-                _captcha: 'false'
-            };
+            const name = formData.get('name') || '';
+            const email = formData.get('email') || '';
+            const subject = formData.get('subject') || 'Portfolio Inquiry';
+            const message = formData.get('message') || '';
 
-            fetch('https://formsubmit.co/ajax/harshakarimikonda22@gmail.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(res => res.json())
-            .then(data => {
-                showToast("Message sent successfully! It has been delivered to my inbox.");
-                contactForm.reset();
-            })
-            .catch(err => {
-                showToast("Direct send error. Please email harshakarimikonda22@gmail.com directly!");
-            })
-            .finally(() => {
+            const mailSubject = encodeURIComponent(`[Portfolio Inquiry] ${subject}`);
+            const mailBody = encodeURIComponent(
+                `Hi Harsha,\n\n${message}\n\n---\nSender: ${name}\nEmail: ${email}`
+            );
+            const mailtoUrl = `mailto:harshakarimikonda22@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+
+            showToast("Opening your email app to send message to harshakarimikonda22@gmail.com...");
+
+            setTimeout(() => {
+                window.location.href = mailtoUrl;
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalContent;
                 if (typeof lucide !== 'undefined') lucide.createIcons();
-            });
+                contactForm.reset();
+            }, 500);
         });
     }
 
