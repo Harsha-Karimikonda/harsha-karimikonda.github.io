@@ -1,0 +1,45 @@
+name: Build and Publish Blog
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'posts/**'
+      - 'build_blog.py'
+      - '.github/workflows/build_blog.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build Blog, Sitemap & SEO
+        run: python3 build_blog.py
+
+      - name: Commit and push generated blog files
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/ sitemap.xml robots.txt
+          if git diff --staged --quiet; then
+            echo "No changes in generated blog files."
+          else
+            git commit -m "chore(blog): auto-generate blog HTML, sitemap, and SEO [skip ci]"
+            git push origin main
+          fi
