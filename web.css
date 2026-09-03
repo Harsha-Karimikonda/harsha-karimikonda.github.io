@@ -314,6 +314,16 @@ a {
     transform: translateY(-2px);
 }
 
+.btn-icon svg,
+.project-icon-link svg,
+.social-pill svg,
+.channel-icon svg {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
 .mobile-toggle {
     display: none;
 }
